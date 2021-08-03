@@ -61,7 +61,6 @@ minetest.register_node(":minecraft:bedrock", {
 	description = "Bedrock",
 	drop = "",
 	tiles = { terrain(17) },
-	groups = { instantly = 3 },
 	sounds = block_sound('stone'),
 })
 
