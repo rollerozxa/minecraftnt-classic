@@ -1,16 +1,41 @@
 
 data = {}
 
+minetest.register_node("mccnt_mapgen:invisible_bedrock", {
+	description = "Invisible Bedrock",
+	drawtype = "airlike",
+	pointable = true,
+	diggable = false,
+	buildable_to = false,
+	sunlight_propagates = true,
+})
+
+minetest.register_node("mccnt_mapgen:solid_water", {
+	description = "Solid Water",
+	drawtype = "glasslike",
+	tiles = { terrain(14) },
+	use_texture_alpha = "blend",
+	paramtype = "light",
+	pointable = true,
+	diggable = false,
+	buildable_to = false,
+	sunlight_propagates = true,
+})
+
 mg = {
 	blocks = {
 		grass = minetest.get_content_id("minecraft:grass"),
 		dirt = minetest.get_content_id("minecraft:dirt"),
 		bedrock = minetest.get_content_id("minecraft:bedrock"),
+		invisible_bedrock = minetest.get_content_id("mccnt_mapgen:invisible_bedrock"),
+		solid_water = minetest.get_content_id("mccnt_mapgen:solid_water"),
 		water = minetest.get_content_id("minecraft:water"),
 	},
-	size = 256,
+	size = 128,
 	depth = 64
 }
+
+if minetest.get_mapgen_setting('mg_name') == "singlenode" then
 
 minetest.register_on_generated(function(minp, maxp, blockseed)
 	local vm, emin, emax = minetest.get_mapgen_object("voxelmanip")
@@ -44,8 +69,21 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 					 or (pos.y == -3 and (pos.x > mg.size +1 or pos.x < -mg.size -1 or pos.z > mg.size +1 or pos.z < -mg.size -1)) then
 						data[posi] = mg.blocks.bedrock
 					end
+				elseif	pos.y >= 0 and (
+						(pos.x == -mg.size -1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
+					 or	(pos.x ==  mg.size +1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
+					 or	(pos.z == -mg.size -1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1))
+					 or	(pos.z ==  mg.size +1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1))) then
+					data[posi] = mg.blocks.invisible_bedrock
 				elseif pos.y < 0 and pos.y > -3 then
-					data[posi] = mg.blocks.water
+					if	(pos.x == -mg.size -1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
+					 or	(pos.x ==  mg.size +1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
+					 or	(pos.z == -mg.size -1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1))
+					 or	(pos.z ==  mg.size +1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1)) then
+						data[posi] = mg.blocks.solid_water
+					else
+						data[posi] = mg.blocks.water
+					end
 				end
 			end
 		end
@@ -54,3 +92,5 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 	vm:set_data(data)
 	vm:write_to_map()
 end)
+
+end
