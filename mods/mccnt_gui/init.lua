@@ -15,7 +15,7 @@ minetest.register_on_joinplayer(function(player)
 		"minecraft:log",
 		"minecraft:leaves",
 		"minecraft:glass",
-		"minecraft:sponge"
+		"minecraft:stone_slab"
 	}
 
 	i = 1
