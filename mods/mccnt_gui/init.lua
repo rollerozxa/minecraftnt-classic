@@ -29,4 +29,5 @@ minetest.register_on_placenode(function(pos, newnode, placer, oldnode, itemstack
 	return true
 end)
 
-dofile(minetest.get_modpath('mccnt_gui').."/blockselect.lua")
+--dofile(minetest.get_modpath('mccnt_gui').."/blockselect.lua")
+dofile(minetest.get_modpath('mccnt_gui').."/inventory.lua")

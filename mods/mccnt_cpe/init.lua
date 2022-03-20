@@ -1,4 +1,4 @@
-
+--[[
 minetest.register_node(":minecraft:cobblestone_slab", {
 	description = "Cobblestone Slab",
 	drop = "",
@@ -152,3 +152,4 @@ minetest.register_node(":minecraft:stone_brick", {
 	groups = { instantly = 3 },
 	sounds = block_sound('stone'),
 })
+]]
