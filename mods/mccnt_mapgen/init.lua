@@ -1,5 +1,5 @@
 
-data = {}
+local data = {}
 
 minetest.register_node("mccnt_mapgen:invisible_bedrock", {
 	description = "Invisible Bedrock",
@@ -8,6 +8,7 @@ minetest.register_node("mccnt_mapgen:invisible_bedrock", {
 	diggable = false,
 	buildable_to = false,
 	sunlight_propagates = true,
+	groups = { not_in_creative_inventory = 1 }
 })
 
 minetest.register_node("mccnt_mapgen:solid_water", {
@@ -20,9 +21,10 @@ minetest.register_node("mccnt_mapgen:solid_water", {
 	diggable = false,
 	buildable_to = false,
 	sunlight_propagates = true,
+	groups = { not_in_creative_inventory = 1 }
 })
 
-mg = {
+local mg = {
 	blocks = {
 		grass = minetest.get_content_id("minecraft:grass"),
 		dirt = minetest.get_content_id("minecraft:dirt"),
@@ -45,13 +47,13 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 	for z = 0, 79 do
 		for y = 0, 79 do
 			for x = 0, 79 do
-				pos = {
+				local pos = {
 					x = minp.x + x,
 					y = minp.y + y,
 					z = minp.z + z
 				}
 
-				posi = area:index(pos.x, pos.y, pos.z)
+				local posi = area:index(pos.x, pos.y, pos.z)
 
 				if (pos.x >= -mg.size and pos.x <= mg.size) and (pos.z >= -mg.size and pos.z <= mg.size) then
 					if pos.y >= -mg.depth and pos.y <= -1 then
