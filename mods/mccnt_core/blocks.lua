@@ -75,6 +75,28 @@ local blocks = {
 		groups = {water = 3, liquid = 3},
 		waving = 3
 	},
+	still_water = {
+		order = 9,
+		description = "Still Water",
+		drawtype = "liquid",
+		tiles = { terrain(14) },
+		use_texture_alpha = "blend",
+		paramtype = "light",
+		walkable = false,
+		pointable = false,
+		diggable = false,
+		buildable_to = true,
+		is_ground_content = false,
+		drowning = 1,
+		liquidtype = "source",
+		liquid_alternative_flowing = "minecraft:water",
+		liquid_alternative_source = "minecraft:water",
+		liquid_viscosity = WATER_VISC,
+		liquid_range = 0,
+		post_effect_color = {a = 128, r = 0, g = 0, b = 255},
+		groups = {water = 3, liquid = 3},
+		waving = 3
+	},
 	lava = {
 		order = 10,
 		description = "Lava",
@@ -97,7 +119,28 @@ local blocks = {
 		groups = {water = 3, liquid = 3},
 		waving = 3
 	},
-
+	still_lava = {
+		order = 11,
+		description = "Still Lava",
+		drawtype = "liquid",
+		tiles = { terrain(30) },
+		use_texture_alpha = "blend",
+		paramtype = "light",
+		walkable = false,
+		pointable = false,
+		diggable = false,
+		buildable_to = true,
+		is_ground_content = false,
+		drowning = 1,
+		liquidtype = "source",
+		liquid_alternative_flowing = "minecraft:lava",
+		liquid_alternative_source = "minecraft:lava",
+		liquid_viscosity = WATER_VISC,
+		liquid_range = 0,
+		post_effect_color = {a = 128, r = 0, g = 0, b = 255},
+		groups = {water = 3, liquid = 3},
+		waving = 3
+	},
 	sand = {
 		order = 12,
 		description = "Sand",
@@ -338,6 +381,20 @@ local blocks = {
 			terrain(39),
 		},
 		sound = 'metal',
+	},
+
+	double_stone_slab = {
+		order = 43,
+		description = "Double Stone Slab",
+		tiles = {
+			terrain(6),
+			terrain(6),
+			terrain(5),
+			terrain(5),
+			terrain(5),
+			terrain(5),
+		},
+		sound = 'stone',
 	},
 
 	stone_slab = {
