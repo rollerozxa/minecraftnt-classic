@@ -4,11 +4,12 @@ local data = {}
 minetest.register_node("mccnt_mapgen:invisible_bedrock", {
 	description = "Invisible Bedrock",
 	drawtype = "airlike",
-	pointable = true,
+	paramtype = "light",
+	pointable = false,
 	diggable = false,
 	buildable_to = false,
 	sunlight_propagates = true,
-	groups = { not_in_creative_inventory = 1 }
+	groups = { not_in_creative_inventory = 1 },
 })
 
 minetest.register_node("mccnt_mapgen:solid_water", {
@@ -17,24 +18,26 @@ minetest.register_node("mccnt_mapgen:solid_water", {
 	tiles = { terrain(14) },
 	use_texture_alpha = "blend",
 	paramtype = "light",
-	pointable = true,
+	pointable = false,
 	diggable = false,
 	buildable_to = false,
 	sunlight_propagates = true,
-	groups = { not_in_creative_inventory = 1 }
+	groups = { not_in_creative_inventory = 1 },
 })
 
 local mg = {
 	blocks = {
 		grass = minetest.get_content_id("minecraft:grass"),
 		dirt = minetest.get_content_id("minecraft:dirt"),
+		stone = minetest.get_content_id("minecraft:stone"),
 		bedrock = minetest.get_content_id("minecraft:bedrock"),
 		invisible_bedrock = minetest.get_content_id("mccnt_mapgen:invisible_bedrock"),
 		solid_water = minetest.get_content_id("mccnt_mapgen:solid_water"),
 		water = minetest.get_content_id("minecraft:water"),
 	},
 	size = 128,
-	depth = 64
+	depth = 64,
+	small_depth = 8,
 }
 
 if minetest.get_mapgen_setting('mg_name') == "singlenode" then
@@ -55,36 +58,44 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 
 				local posi = area:index(pos.x, pos.y, pos.z)
 
+				-- inside the border
 				if (pos.x >= -mg.size and pos.x <= mg.size) and (pos.z >= -mg.size and pos.z <= mg.size) then
-					if pos.y >= -mg.depth and pos.y <= -1 then
-						data[posi] = mg.blocks.dirt
+					if pos.y > 0 then
+						-- air, leave as-is
 					elseif pos.y == 0 then
 						data[posi] = mg.blocks.grass
+					elseif pos.y >= -mg.small_depth then
+						data[posi] = mg.blocks.dirt
+					elseif pos.y >= -mg.depth then
+						data[posi] = mg.blocks.stone
 					elseif pos.y == -mg.depth -1 then
 						data[posi] = mg.blocks.bedrock
+					-- else pos.y < -mg.depth -1 then -- air, leave as-is
 					end
-				elseif pos.y >= -mg.depth -1 and pos.y <= -3 then
-					if	(pos.x == -mg.size -1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
-					 or	(pos.x ==  mg.size +1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
-					 or	(pos.z == -mg.size -1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1))
-					 or	(pos.z ==  mg.size +1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1))
-					 or (pos.y == -3 and (pos.x > mg.size +1 or pos.x < -mg.size -1 or pos.z > mg.size +1 or pos.z < -mg.size -1)) then
-						data[posi] = mg.blocks.bedrock
-					end
-				elseif	pos.y >= 0 and (
-						(pos.x == -mg.size -1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
-					 or	(pos.x ==  mg.size +1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
-					 or	(pos.z == -mg.size -1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1))
-					 or	(pos.z ==  mg.size +1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1))) then
-					data[posi] = mg.blocks.invisible_bedrock
-				elseif pos.y < 0 and pos.y > -3 then
-					if	(pos.x == -mg.size -1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
-					 or	(pos.x ==  mg.size +1 and (pos.z >= -mg.size -1 and pos.z <= mg.size +1))
-					 or	(pos.z == -mg.size -1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1))
-					 or	(pos.z ==  mg.size +1 and (pos.x >= -mg.size -1 and pos.x <= mg.size +1)) then
+
+				-- the border
+				elseif (
+					    (pos.x == -mg.size -1)
+					 or	(pos.x ==  mg.size +1)
+					 or	(pos.z == -mg.size -1)
+					 or	(pos.z ==  mg.size +1)
+				) then
+					if pos.y > 0 then
+						data[posi] = mg.blocks.invisible_bedrock
+					elseif pos.y >= -mg.depth-1 then
 						data[posi] = mg.blocks.solid_water
-					else
-						data[posi] = mg.blocks.water
+					else -- pos.y < -mg.depth-1
+						data[posi] = mg.blocks.invisible_bedrock
+					end
+
+				-- outside the border
+				-- infinite ocean
+				else -- (pos.x < -mg.size-1 or pos.x > mg.size+1) or (pos.z < -mg.size-1 or pos.z > mg.size+1)
+					if pos.y > 0 then
+						-- air, leave as-is
+					elseif pos.y >= -mg.depth-1 then
+						data[posi] = mg.blocks.solid_water
+					-- else pos.y < -mg.depth-1 then -- air, leave as-is
 					end
 				end
 			end
@@ -93,6 +104,7 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 
 	vm:set_data(data)
 	vm:write_to_map()
+	minetest.fix_light(minp, maxp)
 end)
 
 end
