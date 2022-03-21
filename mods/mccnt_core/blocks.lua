@@ -51,6 +51,7 @@ local blocks = {
 		description = "Bedrock",
 		tiles = { terrain(17) },
 		sound = 'stone',
+		unbreakable = true
 	},
 	water = {
 		order = 8,
@@ -403,7 +404,9 @@ local blocks = {
 
 for name, def in pairs(blocks) do
 	if not def.groups then def.groups = {} end
-	def.groups.instantly = 3
+	if not def.unbreakable then
+		def.groups.instantly = 3
+	end
 
 	def.drop = ""
 
