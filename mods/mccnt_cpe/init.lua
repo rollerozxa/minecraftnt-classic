@@ -1,155 +1,152 @@
---[[
-minetest.register_node(":minecraft:cobblestone_slab", {
-	description = "Cobblestone Slab",
-	drop = "",
-	tiles = { terrain(16) },
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.5, 0.5, 0, 0.5}, -- NodeBox1
-		}
+
+local blocks = {
+	cobblestone_slab = {
+		order = 50,
+		description = "Cobblestone Slab",
+		tiles = { terrain(16) },
+		drawtype = "nodebox",
+		paramtype = "light",
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5}
+			}
+		},
+		sound = 'stone',
 	},
-	groups = { instantly = 3 },
-	sounds = block_sound('stone'),
-})
-
-minetest.register_node(":minecraft:rope", {
-	description = "Rope",
-	drop = "",
-	drawtype = "plantlike",
-	paramtype = "light",
-	walkable = false,
-	climbable = true,
-	sunlight_propagates = true,
-	tiles = { terrain(11) },
-	groups = { instantly = 3 },
-	sounds = block_sound('wood'),
-})
-
-minetest.register_node(":minecraft:sandstone", {
-	description = "Sandstone",
-	drop = "",
-	tiles = {
-		terrain(25),
-		terrain(57),
-		terrain(41)
+	rope = {
+		order = 51,
+		description = "Rope",
+		tiles = { terrain(11) },
+		drawtype = "plantlike",
+		paramtype = "light",
+		walkable = false,
+		climbable = true,
+		sunlight_propagates = true,
+		sound = 'wood',
 	},
-	groups = { instantly = 3 },
-	sounds = block_sound('stone'),
-})
-
-minetest.register_node(":minecraft:snow", {
-	description = "Snow",
-	drop = "",
-	tiles = { terrain(50) },
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.5, 0.5, -0.25, 0.5}, -- NodeBox1
-		}
+	sandstone = {
+		order = 52,
+		description = "Sandstone",
+		tiles = {
+			terrain(25),
+			terrain(57),
+			terrain(41)},
+		sound = 'stone',
 	},
-	groups = { instantly = 3 },
-	sounds = block_sound('snow'),
-})
-
-minetest.register_node(":minecraft:fire", {
-	description = "Fire",
-	drop = "",
-	drawtype = "plantlike",
-	paramtype = "light",
-	walkable = false,
-	sunlight_propagates = true,
-	tiles = { terrain(38) },
-	groups = { instantly = 3 },
-	sounds = block_sound('stone'),
-})
-
-cpe_wool_colors = {
-	{
-		id = "light_pink",
-		name = "Light Pink"
-	}, {
-		id = "forest_green",
-		name = "Forest Green"
-	}, {
-		id = "brown",
-		name = "Brown"
-	}, {
-		id = "deep_blue",
-		name = "Deep Blue"
-	}, {
-		id = "turquoise",
-		name = "Turquoise"
+	snow = {
+		order = 53,
+		description = "Snow",
+		tiles = { terrain(50) },
+		drawtype = "nodebox",
+		paramtype = "light",
+		node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, -0.25, 0.5}, -- NodeBox1
+			}
+		},
+		sound = 'snow',
+	},
+	fire = {
+		order = 54,
+		description = "Fire",
+		tiles = { terrain(38) },
+		drawtype = "plantlike",
+		paramtype = "light",
+		walkable = false,
+		sunlight_propagates = true,
+		sound = 'stone',
+	},
+	-- cpe wools
+	light_pink_wool = {
+		order = 55,
+		description = "Light Pink Wool",
+		tiles = { terrain(80) },
+		sound = 'cloth',
+	},
+	forest_green_wool = {
+		order = 56,
+		description = "Forest Green Wool",
+		tiles = { terrain(81) },
+		sound = 'cloth',
+	},
+	brown_wool = {
+		order = 57,
+		description = "Brown Wool",
+		tiles = { terrain(82) },
+		sound = 'cloth',
+	},
+	deep_blue_wool = {
+		order = 58,
+		description = "Deep Blue Wool",
+		tiles = { terrain(83) },
+		sound = 'cloth',
+	},
+	turquoise_wool = {
+		order = 59,
+		description = "Turquoise Wool",
+		tiles = { terrain(84) },
+		sound = 'cloth',
+	},
+	ice = {
+		order = 60,
+		description = "Ice",
+		drawtype = "glasslike",
+		tiles = { terrain(51) },
+		paramtype = "light",
+		sound = 'stone',
+	},
+	ceramic_tile = {
+		order = 61,
+		description = "Ceramic Tile",
+		tiles = { terrain(54) },
+		sound = 'stone',
+	},
+	magma_block = {
+		order = 62,
+		description = "Magma Block",
+		tiles = { terrain(86) },
+		sound = 'stone',
+	},
+	pillar = {
+		order = 63,
+		description = "Pillar",
+		tiles = {
+			terrain(26),
+			terrain(58),
+			terrain(42)
+		},
+		sound = 'stone',
+	},
+	crate = {
+		order = 64,
+		description = "Crate",
+		tiles = { terrain(53) },
+		sound = 'wood',
+	},
+	stone_brick = {
+		order = 65,
+		description = "Stone Brick",
+		tiles = { terrain(52) },
+		sound = 'stone',
 	},
 }
 
-i = 80
-for k, v in pairs(cpe_wool_colors) do
-	minetest.register_node(":minecraft:"..v['id'].."_wool", {
-		description = v['name'].." Wool",
-		drop = "",
-		tiles = { terrain(i) },
-		groups = { instantly = 3 },
-		sounds = block_sound('cloth'),
-	})
-	i = i + 1
+for name, def in pairs(blocks) do
+	if not def.groups then def.groups = {} end
+	if not def.unbreakable then
+		def.groups.instantly = 3
+	end
+
+	def.drop = ""
+
+	def.stack_max = 1
+
+	if def.sound then
+		def.sounds = block_sound(def.sound)
+		def.sound = nil
+	end
+
+	minetest.register_node(":minecraft:"..name, def)
 end
-
-minetest.register_node(":minecraft:ice", {
-	description = "Ice",
-	drop = "",
-	drawtype = "glasslike",
-	tiles = { terrain(51) },
-	paramtype = "light",
-	groups = { instantly = 3 },
-	sounds = block_sound('stone'),
-})
-
-minetest.register_node(":minecraft:ceramic_tile", {
-	description = "Ceramic Tile",
-	drop = "",
-	tiles = { terrain(54) },
-	groups = { instantly = 3 },
-	sounds = block_sound('stone'),
-})
-
-minetest.register_node(":minecraft:magma_block", {
-	description = "Magma Block",
-	drop = "",
-	tiles = { terrain(86) },
-	groups = { instantly = 3 },
-	sounds = block_sound('stone'),
-})
-
-minetest.register_node(":minecraft:pillar", {
-	description = "Pillar",
-	drop = "",
-	tiles = {
-		terrain(26),
-		terrain(58),
-		terrain(42)
-	},
-	groups = { instantly = 3 },
-	sounds = block_sound('stone'),
-})
-
-minetest.register_node(":minecraft:crate", {
-	description = "Crate",
-	drop = "",
-	tiles = { terrain(53) },
-	groups = { instantly = 3 },
-	sounds = block_sound('wood'),
-})
-
-minetest.register_node(":minecraft:stone_brick", {
-	description = "Stone Brick",
-	drop = "",
-	tiles = { terrain(52) },
-	groups = { instantly = 3 },
-	sounds = block_sound('stone'),
-})
-]]

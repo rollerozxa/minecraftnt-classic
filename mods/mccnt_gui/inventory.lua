@@ -17,14 +17,14 @@ local inv_creative = minetest.create_detached_inventory("creative", {
 function get_creative_formspec(page)
 	local inv_formspec = [[
 		formspec_version[4]
-		size[12.1,10.9]
-		box[0,0;12.1,10.9;#0000ff09]
+		size[14.45,10.9]
+		box[0,0;14.45,10.9;#0000ff09]
 		style[lbl_sel;border=false]
-		button[0,0;12.1,1;lbl_sel;Select block]
+		button[0,0;14.45,1;lbl_sel;Select block]
 
 		listcolors[#00000000;#888888]
-		list[detached:creative;main;0.5,1;9,6;0]
-		list[current_player;main;0.5,9.3;9,1;0]
+		list[detached:creative;main;0.5,1;11,6;0]
+		list[current_player;main;1.75,9.3;9,1;0]
 	]]
 	return inv_formspec
 end
@@ -37,7 +37,6 @@ minetest.register_on_mods_loaded(function()
 		end
 	end
 	inv_creative:set_size("main", #items)
-	max_page = math.ceil(#items / 54)
 	-- poor man's sorting algo
 	for i=1, #items do
 		for j=1, #items do
