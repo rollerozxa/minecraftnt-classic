@@ -35,9 +35,9 @@ local mg = {
 		solid_water = minetest.get_content_id("mccnt_mapgen:solid_water"),
 		water = minetest.get_content_id("minecraft:water"),
 	},
-	size = 128,
-	depth = 64,
-	small_depth = 8,
+	size = tonumber(minetest.settings:get("mccnt_mapgen_radius")) or 128,
+	depth = tonumber(minetest.settings:get("mccnt_mapgen_depth")) or 64,
+	top_depth = tonumber(minetest.settings:get("mccnt_mapgen_top_depth")) or 8,
 }
 
 if minetest.get_mapgen_setting('mg_name') == "singlenode" then
@@ -64,7 +64,7 @@ minetest.register_on_generated(function(minp, maxp, blockseed)
 						-- air, leave as-is
 					elseif pos.y == 0 then
 						data[posi] = mg.blocks.grass
-					elseif pos.y >= -mg.small_depth then
+					elseif pos.y >= -mg.top_depth then
 						data[posi] = mg.blocks.dirt
 					elseif pos.y >= -mg.depth then
 						data[posi] = mg.blocks.stone

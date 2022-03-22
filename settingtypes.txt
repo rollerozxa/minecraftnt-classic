@@ -1,0 +1,7 @@
+[Mapgen]
+#	Accessible world radius in the horizontal. Total space will be (2*this)^2
+mccnt_mapgen_radius (World radius) int 128
+#	Accessible world depth.
+mccnt_mapgen_depth (World depth) int 64
+#	World top-depth. This is usually dirt.
+mccnt_mapgen_top_depth (World top-layer depth) int 8
