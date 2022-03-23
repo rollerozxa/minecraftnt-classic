@@ -31,4 +31,6 @@ minetest.register_on_joinplayer(function(player)
 		{x = 200, y = 219},
 		30
 	)
+
+	player:override_day_night_ratio(1)
 end)
