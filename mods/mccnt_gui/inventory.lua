@@ -9,9 +9,10 @@ local inv_creative = minetest.create_detached_inventory("creative", {
 	allow_take = function(inv, listname, index, stack, player)
 		return -1
 	end,
-	on_take = function(inv, listname, index, stack, player)
-		inv:set_stack(listname, index, stack)
-	end
+	on_move = function(inv, from_list, from_index, to_list, to_index, count, player2)
+	end,
+	on_take = function(inv, listname, index, stack, player2)
+	end,
 })
 
 function get_creative_formspec(page)
