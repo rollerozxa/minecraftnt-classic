@@ -483,7 +483,10 @@ for name, def in pairs(blocks) do
 		def.on_place = function(itemstack, placer, pointed_thing)
 			if not minetest.check_player_privs(placer, 'give') then
 				minetest.chat_send_player(placer:get_player_name(), minetest.colorize("#FF0000", "You don't have permission to place this block!"))
+				return itemstack
 			end
+			minetest.set_node(pointed_thing.above, { name = itemstack:get_name() })
+			return itemstack
 		end
 	end
 
