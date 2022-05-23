@@ -51,7 +51,8 @@ local blocks = {
 		description = "Bedrock",
 		tiles = { terrain(17) },
 		sound = 'stone',
-		unbreakable = true
+		unbreakable = true,
+		admin_block = true
 	},
 	water = {
 		order = 8,
@@ -73,7 +74,8 @@ local blocks = {
 		liquid_range = 0,
 		post_effect_color = {a = 128, r = 0, g = 0, b = 255},
 		groups = {water = 3, liquid = 3},
-		waving = 3
+		waving = 3,
+		admin_block = true
 	},
 	still_water = {
 		order = 9,
@@ -95,7 +97,8 @@ local blocks = {
 		liquid_range = 0,
 		post_effect_color = {a = 128, r = 0, g = 0, b = 255},
 		groups = {water = 3, liquid = 3},
-		waving = 3
+		waving = 3,
+		admin_block = true
 	},
 	lava = {
 		order = 10,
@@ -117,7 +120,8 @@ local blocks = {
 		liquid_range = 0,
 		post_effect_color = {a = 128, r = 0, g = 0, b = 255},
 		groups = {water = 3, liquid = 3},
-		waving = 3
+		waving = 3,
+		admin_block = true
 	},
 	still_lava = {
 		order = 11,
@@ -139,7 +143,8 @@ local blocks = {
 		liquid_range = 0,
 		post_effect_color = {a = 128, r = 0, g = 0, b = 255},
 		groups = {water = 3, liquid = 3},
-		waving = 3
+		waving = 3,
+		admin_block = true
 	},
 	sand = {
 		order = 12,
@@ -472,6 +477,14 @@ for name, def in pairs(blocks) do
 	if def.sound then
 		def.sounds = block_sound(def.sound)
 		def.sound = nil
+	end
+
+	if def.admin_block then
+		def.on_place = function(itemstack, placer, pointed_thing)
+			if not minetest.check_player_privs(placer, 'give') then
+				minetest.chat_send_player(placer:get_player_name(), minetest.colorize("#FF0000", "You don't have permission to place this block!"))
+			end
+		end
 	end
 
 	minetest.register_node(":minecraft:"..name, def)
