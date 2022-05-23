@@ -3,10 +3,10 @@
 minetest.register_on_joinplayer(function(player)
 	player:hud_set_hotbar_itemcount(9)
 
-	player:hud_set_hotbar_image("gui_hotbar.png")
-	player:hud_set_hotbar_selected_image("gui_hotbar_selected.png")
+	player:hud_set_hotbar_image("mccnt_gui_hotbar.png")
+	player:hud_set_hotbar_selected_image("mccnt_gui_hotbar_selected.png")
 
-	default_blocks = {
+	local default_blocks = {
 		"minecraft:stone",
 		"minecraft:cobblestone",
 		"minecraft:bricks",
@@ -18,7 +18,7 @@ minetest.register_on_joinplayer(function(player)
 		"minecraft:stone_slab"
 	}
 
-	i = 1
+	local i = 1
 	for k, v in ipairs(default_blocks) do
 		player:get_inventory():set_stack("main", i, ItemStack(v))
 		i = i + 1

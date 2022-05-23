@@ -1,6 +1,4 @@
-*.ogg
 _todo_resources/
 
 .vscode/
 *.patch
-mods/chest_of_everything/
