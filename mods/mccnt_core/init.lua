@@ -15,3 +15,7 @@ minetest.register_item(":", {
 		}
 	}
 })
+
+minetest.register_on_joinplayer(function(player)
+	minetest.set_player_privs(player:get_player_name(), {fly = true, fast = true})
+end)
