@@ -15,7 +15,9 @@ local inv_creative = minetest.create_detached_inventory("creative", {
 	end,
 })
 
-function get_creative_formspec(page)
+local inventory_blocks = {}
+
+function get_creative_formspec()
 	local inv_formspec = [[
 		formspec_version[4]
 		size[14.45,10.9]
@@ -37,11 +39,11 @@ minetest.register_on_mods_loaded(function()
 			table.insert(items, itemstring)
 		end
 	end
-	inv_creative:set_size("main", #items)
 	-- poor man's sorting algo
 	for i=1, #items do
 		for j=1, #items do
 			if minetest.registered_nodes[items[j]].order == i then
+				table.insert(inventory_blocks, items[j])
 				inv_creative:add_item("main", items[j])
 			end
 		end
@@ -49,5 +51,16 @@ minetest.register_on_mods_loaded(function()
 end)
 
 minetest.register_on_joinplayer(function(player)
-	player:set_inventory_formspec(get_creative_formspec(1))
+	player:set_inventory_formspec(get_creative_formspec())
 end)
+
+local reset_blockselect = function()
+	inv_creative:set_size("main", 0)
+	inv_creative:set_size("main", #inventory_blocks)
+	for _,block in pairs(inventory_blocks) do
+		inv_creative:add_item("main", block)
+	end
+end
+
+minetest.register_on_joinplayer(reset_blockselect)
+minetest.register_on_leaveplayer(reset_blockselect)
