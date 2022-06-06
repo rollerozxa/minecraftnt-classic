@@ -16,6 +16,10 @@ minetest.register_item(":", {
 	}
 })
 
-minetest.register_on_joinplayer(function(player)
-	minetest.set_player_privs(player:get_player_name(), {fly = true, fast = true})
+minetest.register_on_newplayer(function(player)
+	local playername = player:get_player_name()
+	local pri = minetest.get_player_privs(playername)
+	pri["fly"] = true
+	pri["fast"] = true
+	minetest.set_player_privs(playername, pri)
 end)
