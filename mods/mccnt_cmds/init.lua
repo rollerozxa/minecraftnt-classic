@@ -1,1 +1,2 @@
-dofile(minetest.get_modpath("mccnt_cmds").."/build.lua")
+include('build')
+include('msgblock')

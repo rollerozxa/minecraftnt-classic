@@ -3,6 +3,7 @@ local painters = {}
 
 minetest.register_chatcommand("paint", {
 	description = "Paint with your currently held block when breaking.",
+	privs = {interact=true},
 	func = function(name, param)
 		if painters[name] then
 			minetest.chat_send_player(name, minetest.colorize("#ffff00", "Paint mode disabled"))
