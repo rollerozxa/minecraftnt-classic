@@ -1,7 +1,4 @@
-dofile(minetest.get_modpath("mccnt_core") .. "/helpers.lua")
-dofile(minetest.get_modpath("mccnt_core") .. "/blocks.lua")
-
-dofile(minetest.get_modpath("mccnt_core") .. "/mapgen.lua")
+include('blocks')
 
 minetest.register_item(":", {
 	type = "none",
