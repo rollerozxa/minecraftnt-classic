@@ -206,6 +206,36 @@ register('glass', {
 	sound = 'glass',
 })
 
+local wool_colors = {
+	{ id = "red",		name = "Red" },
+	{ id = "orange",	name = "Orange" },
+	{ id = "yellow",	name = "Yellow" },
+	{ id = "lime",		name = "Lime" },
+	{ id = "green",		name = "Green" },
+	{ id = "teal",		name = "Teal" },
+	{ id = "aqua",		name = "Aqua" },
+	{ id = "cyan",		name = "Cyan" },
+	{ id = "blue",		name = "Blue" },
+	{ id = "indigo",	name = "Indigo" },
+	{ id = "violet",	name = "Violet" },
+	{ id = "magenta",	name = "Magenta" },
+	{ id = "pink",		name = "Pink" },
+	{ id = "black",		name = "Black" },
+	{ id = "gray",		name = "Gray" },
+	{ id = "white",		name = "White" }
+}
+
+local i = 0
+for k, v in pairs(wool_colors) do
+	register(v['id'].."_wool", {
+		order = 21,
+		description = v['name'].." Wool",
+		tiles = { terrain(i+64) },
+		sound = 'cloth',
+	})
+	i = i + 1
+end
+
 register('red_wool', {
 	order = 21,
 	description = "Red Wool",
