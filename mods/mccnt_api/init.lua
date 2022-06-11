@@ -23,6 +23,14 @@ function minecraftnt.register_block(name, def)
 
 	def.stack_max = 1
 
+	if def.inventory_image then
+		def.tiles = { def.inventory_image }
+		def.drawtype = "plantlike"
+		def.paramtype = "light"
+		def.walkable = false
+		def.sunlight_propagates = true
+	end
+
 	if def.sound then
 		def.sounds = block_sound(def.sound)
 		def.sound = nil

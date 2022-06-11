@@ -38,13 +38,7 @@ register('wood', {
 register('sapling', {
 	order = 6,
 	description = "Sapling",
-	drawtype = "plantlike",
-	tiles = { terrain(15) },
 	inventory_image = terrain(15),
-	wield_image = terrain(15),
-	paramtype = "light",
-	sunlight_propagates = true,
-	walkable = false,
 	sound = 'grass',
 })
 register('bedrock', {
@@ -312,11 +306,6 @@ register('white_wool', {
 register('red_flower', {
 	order = 37,
 	description = "Red Flower",
-	drawtype = "plantlike",
-	paramtype = "light",
-	walkable = false,
-	sunlight_propagates = true,
-	tiles = { terrain(13) },
 	inventory_image = terrain(13),
 	waving = 1,
 	sound = 'grass',
@@ -324,11 +313,6 @@ register('red_flower', {
 register('yellow_flower', {
 	order = 38,
 	description = "Yellow Flower",
-	drawtype = "plantlike",
-	paramtype = "light",
-	walkable = false,
-	sunlight_propagates = true,
-	tiles = { terrain(12) },
 	inventory_image = terrain(12),
 	waving = 1,
 	sound = 'grass',
@@ -336,11 +320,6 @@ register('yellow_flower', {
 register('brown_mushroom', {
 	order = 39,
 	description = "Brown Mushroom",
-	drawtype = "plantlike",
-	paramtype = "light",
-	walkable = false,
-	sunlight_propagates = true,
-	tiles = { terrain(29) },
 	inventory_image = terrain(29),
 	waving = 1,
 	sound = 'grass',
@@ -348,11 +327,6 @@ register('brown_mushroom', {
 register('red_mushroom', {
 	order = 40,
 	description = "Red Mushroom",
-	drawtype = "plantlike",
-	paramtype = "light",
-	walkable = false,
-	sunlight_propagates = true,
-	tiles = { terrain(28) },
 	inventory_image = terrain(28),
 	waving = 1,
 	sound = 'grass',

@@ -18,12 +18,8 @@ register('cobblestone_slab', {
 register('rope', {
 	order = 51,
 	description = "Rope",
-	tiles = { terrain(11) },
-	drawtype = "plantlike",
-	paramtype = "light",
-	walkable = false,
+	inventory_image = terrain(11),
 	climbable = true,
-	sunlight_propagates = true,
 	sound = 'wood',
 })
 register('sandstone', {
@@ -52,11 +48,7 @@ register('snow', {
 register('fire', {
 	order = 54,
 	description = "Fire",
-	tiles = { terrain(38) },
-	drawtype = "plantlike",
-	paramtype = "light",
-	walkable = false,
-	sunlight_propagates = true,
+	inventory_image = terrain(38),
 	sound = 'stone',
 })
 register('light_pink_wool', {
