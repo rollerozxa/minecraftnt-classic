@@ -228,110 +228,13 @@ local wool_colors = {
 local i = 0
 for k, v in pairs(wool_colors) do
 	register(v['id'].."_wool", {
-		order = 21,
+		order = 21+i,
 		description = v['name'].." Wool",
 		tiles = { terrain(i+64) },
 		sound = 'cloth',
 	})
 	i = i + 1
 end
-
-register('red_wool', {
-	order = 21,
-	description = "Red Wool",
-	tiles = { terrain(64) },
-	sound = 'cloth',
-})
-register('orange_wool', {
-	order = 22,
-	description = "Orange Wool",
-	tiles = { terrain(65) },
-	sound = 'cloth',
-})
-register('yellow_wool', {
-	order = 23,
-	description = "Yellow Wool",
-	tiles = { terrain(66) },
-	sound = 'cloth',
-})
-register('lime_wool', {
-	order = 24,
-	description = "Lime Wool",
-	tiles = { terrain(67) },
-	sound = 'cloth',
-})
-register('green_wool', {
-	order = 25,
-	description = "Green Wool",
-	tiles = { terrain(68) },
-	sound = 'cloth',
-})
-register('teal_wool', {
-	order = 26,
-	description = "Teal Wool",
-	tiles = { terrain(69) },
-	sound = 'cloth',
-})
-register('aqua_wool', {
-	order = 27,
-	description = "Aqua Wool",
-	tiles = { terrain(70) },
-	sound = 'cloth',
-})
-register('cyan_wool', {
-	order = 28,
-	description = "Cyan Wool",
-	tiles = { terrain(71) },
-	sound = 'cloth',
-})
-register('blue_wool', {
-	order = 29,
-	description = "Blue Wool",
-	tiles = { terrain(72) },
-	sound = 'cloth',
-})
-register('indigo_wool', {
-	order = 30,
-	description = "Indigo Wool",
-	tiles = { terrain(73) },
-	sound = 'cloth',
-})
-register('violet_wool', {
-	order = 31,
-	description = "Violet Wool",
-	tiles = { terrain(74) },
-	sound = 'cloth',
-})
-register('magenta_wool', {
-	order = 32,
-	description = "Magenta Wool",
-	tiles = { terrain(75) },
-	sound = 'cloth',
-})
-register('pink_wool', {
-	order = 33,
-	description = "Pink Wool",
-	tiles = { terrain(76) },
-	sound = 'cloth',
-})
-register('black_wool', {
-	order = 34,
-	description = "Black Wool",
-	tiles = { terrain(77) },
-	sound = 'cloth',
-})
-register('gray_wool', {
-	order = 35,
-	description = "Gray Wool",
-	tiles = { terrain(78) },
-	sound = 'cloth',
-})
-register('white_wool', {
-	order = 36,
-	description = "White Wool",
-	tiles = { terrain(79) },
-	sound = 'cloth',
-})
 
 register('red_flower', {
 	order = 37,
