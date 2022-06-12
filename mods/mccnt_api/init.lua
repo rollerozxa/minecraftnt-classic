@@ -42,6 +42,17 @@ function minecraftnt.register_block(name, def)
 		def.sunlight_propagates = true
 	end
 
+	if def.slab then
+		def.drawtype = "nodebox"
+		def.paramtype = "light"
+		def.node_box = {
+			type = "fixed",
+			fixed = {
+				{-0.5, -0.5, -0.5, 0.5, 0, 0.5}
+			}
+		}
+	end
+
 	if def.sound then
 		def.sounds = block_sound(def.sound)
 		def.sound = nil

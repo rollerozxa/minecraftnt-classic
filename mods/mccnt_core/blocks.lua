@@ -175,10 +175,9 @@ register('log', {
 	order = 17,
 	description = "Log",
 	tiles = {
-		"terrain.png^[sheet:16x16:5,1",
-		"terrain.png^[sheet:16x16:5,1",
-		"terrain.png^[sheet:16x16:4,1"
-	},
+		terrain(21),
+		terrain(21),
+		terrain(20)},
 	sound = 'wood',
 })
 register('leaves', {
@@ -271,11 +270,7 @@ register('gold_block', {
 	tiles = {
 		terrain(24),
 		terrain(56),
-		terrain(40),
-		terrain(40),
-		terrain(40),
-		terrain(40),
-	},
+		terrain(40)},
 	sound = 'metal',
 })
 register('iron_block', {
@@ -284,11 +279,7 @@ register('iron_block', {
 	tiles = {
 		terrain(23),
 		terrain(55),
-		terrain(39),
-		terrain(39),
-		terrain(39),
-		terrain(39),
-	},
+		terrain(39)},
 	sound = 'metal',
 })
 register('double_stone_slab', {
@@ -297,8 +288,7 @@ register('double_stone_slab', {
 	tiles = {
 		terrain(6),
 		terrain(6),
-		terrain(5),
-	},
+		terrain(5)},
 	sound = 'stone',
 })
 register('stone_slab', {
@@ -307,16 +297,8 @@ register('stone_slab', {
 	tiles = {
 		terrain(6),
 		terrain(6),
-		terrain(5),
-	},
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.5, 0.5, 0, 0.5},
-		}
-	},
+		terrain(5)},
+	slab = true,
 	sound = 'stone',
 })
 register('bricks', {
@@ -331,8 +313,7 @@ register('tnt', {
 	tiles = {
 		terrain(9),
 		terrain(10),
-		terrain(8),
-	},
+		terrain(8)},
 	sound = 'grass',
 })
 register('bookshelf', {

@@ -5,14 +5,7 @@ register('cobblestone_slab', {
 	order = 50,
 	description = "Cobblestone Slab",
 	tiles = { terrain(16) },
-	drawtype = "nodebox",
-	paramtype = "light",
-	node_box = {
-		type = "fixed",
-		fixed = {
-			{-0.5, -0.5, -0.5, 0.5, 0, 0.5}
-		}
-	},
+	slab = true,
 	sound = 'stone',
 })
 register('rope', {
