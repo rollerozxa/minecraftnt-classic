@@ -39,6 +39,7 @@ function get_creative_formspec(page)
 		style[lbl_sel;border=false]
 		style[inv_prev,inv_next;border=false;bgimg=mccnt_gui_btn.png;bgimg_pressed=mccnt_gui_btn_hover.png;bgimg_middle=1,1;font=bold;font_size=+4]
 		button[0,0;14.45,1;lbl_sel;Select block]
+		label[13.1,0.5;${pageind}]
 
 		listcolors[#00000000;#888888]
 		list[detached:creative;main;0.5,1;11,6;${start}]
@@ -51,6 +52,7 @@ function get_creative_formspec(page)
 	]], {
 		start = start,
 		page = page,
+		pageind = minetest.colorize("#aaaaaa", "("..page.."/"..max_page..")"),
 		prevbtn = prevbtn,
 		nextbtn = nextbtn
 	})
