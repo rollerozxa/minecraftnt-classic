@@ -11,6 +11,17 @@ rawset(_G, "include", include)
 
 include('helpers')
 
+-- Simple formspec wrapper that does variable substitution.
+function formspec_wrapper(formspec, variables)
+	local retval = formspec
+
+	for k,v in pairs(variables) do
+		retval = retval:gsub("${"..k.."}", v)
+	end
+
+	return retval
+end
+
 minecraftnt = {}
 
 function minecraftnt.register_block(name, def)

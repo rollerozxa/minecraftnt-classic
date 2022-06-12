@@ -11,6 +11,10 @@ function terrain(id)
 	return atlas_id("terrain", id)
 end
 
+function terrain2(id)
+	return atlas_id("terrain2", id)
+end
+
 -- Returns a table with sounds for the given material.
 function block_sound(material)
 	-- TODO: metal sounds

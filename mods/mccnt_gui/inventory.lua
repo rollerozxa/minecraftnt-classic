@@ -16,21 +16,58 @@ local inv_creative = minetest.create_detached_inventory("creative", {
 })
 
 local inventory_blocks = {}
+local max_page = 1
+local items_per_page = 66
 
-function get_creative_formspec()
-	local inv_formspec = [[
+function get_creative_formspec(page)
+	local prevbtn, nextbtn = '', ''
+	local start = 0 + ( page - 1 ) * items_per_page
+
+	if page ~= 1 then
+		prevbtn = "button[0.5,8.5;1,1;inv_prev;\\<]"
+	end
+
+	if max_page ~= page then
+		nextbtn = "button[13,8.5;1,1;inv_next;\\>]"
+		--nextbtn = "button[14.44,1;1,7;inv_next;\\>]"
+	end
+
+	return formspec_wrapper([[
 		formspec_version[4]
 		size[14.45,10.9]
-		box[0,0;14.45,10.9;#0000ff09]
+		box[0,0;14.45,10.9;#0000ff10]
 		style[lbl_sel;border=false]
+		style[inv_prev,inv_next;border=false;bgimg=mccnt_gui_btn.png;bgimg_pressed=mccnt_gui_btn_hover.png;bgimg_middle=1,1;font=bold;font_size=+4]
 		button[0,0;14.45,1;lbl_sel;Select block]
 
 		listcolors[#00000000;#888888]
-		list[detached:creative;main;0.5,1;11,6;0]
+		list[detached:creative;main;0.5,1;11,6;${start}]
+		box[1.75,8.75;11,0.1;#88888844]
 		list[current_player;main;1.75,9.3;9,1;0]
-	]]
-	return inv_formspec
+
+		${prevbtn}
+		${nextbtn}
+		field[-10,-10;0,0;internal_paginator;;${page}]
+	]], {
+		start = start,
+		page = page,
+		prevbtn = prevbtn,
+		nextbtn = nextbtn
+	})
 end
+
+minetest.register_on_player_receive_fields(function(player, formname, fields)
+	if formname ~= "" or fields.quit then return end
+
+	local page = fields.internal_paginator
+
+	if fields.inv_prev then page = page - 1
+elseif fields.inv_next then page = page + 1 end
+
+	local formspec = get_creative_formspec(page)
+	player:set_inventory_formspec(formspec)
+	minetest.show_formspec(player:get_player_name(), "", formspec)
+end)
 
 minetest.register_on_mods_loaded(function()
 	local items = {}
@@ -39,6 +76,8 @@ minetest.register_on_mods_loaded(function()
 			table.insert(items, itemstring)
 		end
 	end
+
+	max_page = math.ceil(#items / items_per_page)
 	-- poor man's sorting algo
 	for i=1, #items do
 		for j=1, #items do
@@ -51,7 +90,7 @@ minetest.register_on_mods_loaded(function()
 end)
 
 minetest.register_on_joinplayer(function(player)
-	player:set_inventory_formspec(get_creative_formspec())
+	player:set_inventory_formspec(get_creative_formspec(1))
 end)
 
 local reset_blockselect = function()
