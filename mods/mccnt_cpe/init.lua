@@ -86,6 +86,7 @@ register('ice', {
 	description = "Ice",
 	drawtype = "glasslike",
 	tiles = { terrain(51) },
+	use_texture_alpha = "blend",
 	paramtype = "light",
 	sound = 'stone',
 })
