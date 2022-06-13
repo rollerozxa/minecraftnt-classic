@@ -40,6 +40,7 @@ function minecraftnt.register_block(name, def)
 		def.paramtype = "light"
 		def.walkable = false
 		def.sunlight_propagates = true
+		def.buildable_to = true
 	end
 
 	if def.slab then
