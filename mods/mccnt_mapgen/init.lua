@@ -15,8 +15,7 @@ minetest.register_node("mccnt_mapgen:invisible_bedrock", {
 minetest.register_node("mccnt_mapgen:solid_water", {
 	description = "Solid Water",
 	drawtype = "glasslike",
-	tiles = { terrain(14) },
-	use_texture_alpha = "blend",
+	tiles = { "border_bedrock.png" },
 	paramtype = "light",
 	pointable = false,
 	diggable = false,
