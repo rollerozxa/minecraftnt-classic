@@ -235,16 +235,16 @@ for k, v in pairs(wool_colors) do
 	i = i + 1
 end
 
-register('red_flower', {
+register('yellow_flower', {
 	order = 37,
-	description = "Red Flower",
+	description = "Yellow Flower",
 	inventory_image = terrain(13),
 	waving = 1,
 	sound = 'grass',
 })
-register('yellow_flower', {
+register('red_flower', {
 	order = 38,
-	description = "Yellow Flower",
+	description = "Red Flower",
 	inventory_image = terrain(12),
 	waving = 1,
 	sound = 'grass',
