@@ -10,7 +10,11 @@ minetest.register_item(":", {
 		groupcaps = {
 			instantly = {times = {[3] = 0}, uses = 0, maxlevel = 256}
 		}
-	}
+	},
+	on_place = function(itemstack, placer, pointed_thing)
+		local pointed_node = minetest.get_node(pointed_thing.under)
+		return pointed_node
+	end
 })
 
 minetest.register_on_newplayer(function(player)
@@ -20,15 +24,6 @@ minetest.register_on_newplayer(function(player)
 	pri["fast"] = true
 	minetest.set_player_privs(playername, pri)
 end)
-
-minetest.override_item("", {
-	on_place = function(itemstack, placer, pointed_thing)
-		if minetest.is_creative_enabled(placer:get_player_name()) then
-			local pointed_node = minetest.get_node(pointed_thing.under)
-			return pointed_node
-		end
-	end
-})
 
 minetest.register_on_joinplayer(function(player)
 	player:set_lighting({
