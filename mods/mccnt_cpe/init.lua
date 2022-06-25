@@ -41,7 +41,17 @@ register('snow', {
 register('fire', {
 	order = 54,
 	description = "Fire",
+	light_source = minetest.LIGHT_MAX-1,
 	inventory_image = terrain(38),
+	tiles = {{
+		name = "mccnt_cpe_fire.png",
+		animation = {
+			type = "sheet_2d",
+			frames_w = 32,
+			frames_h = 1,
+			frame_length = 0.05,
+		}
+	}},
 	sound = 'stone',
 })
 register('light_pink_wool', {
