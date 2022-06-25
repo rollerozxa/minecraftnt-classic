@@ -61,7 +61,9 @@ end
 minetest.register_on_player_receive_fields(function(player, formname, fields)
 	if formname ~= "" or fields.quit then return end
 
-	local page = fields.internal_paginator
+	local page = tonumber(fields.internal_paginator)
+	-- check for sussy page input that some impostor has fucked with!! :flushed:
+	if not page == tonumber(page) then return end
 
 	if fields.inv_prev then page = page - 1
 elseif fields.inv_next then page = page + 1 end
