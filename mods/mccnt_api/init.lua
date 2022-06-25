@@ -35,12 +35,11 @@ function minecraftnt.register_block(name, def)
 	def.stack_max = 1
 
 	if def.inventory_image then
-		def.tiles = { def.inventory_image }
+		def.tiles = def.tiles or { def.inventory_image }
 		def.drawtype = "plantlike"
 		def.paramtype = "light"
 		def.walkable = false
 		def.sunlight_propagates = true
-		def.buildable_to = true
 	end
 
 	if def.slab then

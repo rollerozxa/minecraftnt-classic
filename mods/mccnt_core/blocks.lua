@@ -240,6 +240,7 @@ register('yellow_flower', {
 	description = "Yellow Flower",
 	inventory_image = terrain(13),
 	waving = 1,
+	buildable_to = true,
 	sound = 'grass',
 })
 register('red_flower', {
@@ -247,6 +248,7 @@ register('red_flower', {
 	description = "Red Flower",
 	inventory_image = terrain(12),
 	waving = 1,
+	buildable_to = true,
 	sound = 'grass',
 })
 register('brown_mushroom', {
@@ -254,6 +256,7 @@ register('brown_mushroom', {
 	description = "Brown Mushroom",
 	inventory_image = terrain(29),
 	waving = 1,
+	buildable_to = true,
 	sound = 'grass',
 })
 register('red_mushroom', {
@@ -261,6 +264,7 @@ register('red_mushroom', {
 	description = "Red Mushroom",
 	inventory_image = terrain(28),
 	waving = 1,
+	buildable_to = true,
 	sound = 'grass',
 })
 
