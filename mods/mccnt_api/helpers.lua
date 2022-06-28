@@ -1,5 +1,16 @@
 --- Misc. Helper functions
 
+-- Simple formspec wrapper that does variable substitution.
+function formspec_wrapper(formspec, variables)
+	local retval = formspec
+
+	for k,v in pairs(variables) do
+		retval = retval:gsub("${"..k.."}", v)
+	end
+
+	return retval
+end
+
 function atlas_id(tex, id)
 	local x = id % 16
 	local y = math.floor(id / 16)
