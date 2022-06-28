@@ -1,4 +1,5 @@
 
+-- /paint
 local painters = {}
 
 minetest.register_chatcommand("paint", {
@@ -6,10 +7,10 @@ minetest.register_chatcommand("paint", {
 	privs = {interact=true},
 	func = function(name, param)
 		if painters[name] then
-			minetest.chat_send_player(name, minetest.colorize("#ffff00", "Paint mode disabled"))
+			minetest.chat_send_player(name, yellow("Paint mode disabled"))
 			painters[name] = false
 		else
-			minetest.chat_send_player(name, minetest.colorize("#ffff00", "Paint mode enabled"))
+			minetest.chat_send_player(name, yellow("Paint mode enabled"))
 			painters[name] = true
 		end
 	end
