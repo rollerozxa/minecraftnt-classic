@@ -34,8 +34,9 @@ minetest.register_on_joinplayer(function(player)
 
 	player:override_day_night_ratio(1)
 
-	local playername = player:get_player_name()
-	if playername == "ROllerozxa" then
-		player_api.set_textures(player, {"character_rollerozxa.png"})
+	local name = player:get_player_name():lower()
+	local skin = io.open(minetest.get_modpath("mccnt_player").."/textures/character_"..name..".png")
+	if skin ~= nil then
+		player_api.set_textures(player, {"character_"..name..".png"})
 	end
 end)
