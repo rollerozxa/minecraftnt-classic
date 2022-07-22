@@ -19,7 +19,10 @@ minetest.register_chatcommand("paint", {
 minetest.register_on_dignode(function(pos, oldnode, digger)
 	local playername = digger:get_player_name()
 	if painters[playername] then
-		minetest.set_node(pos, { name = digger:get_wielded_item():get_name() })
+		local node = digger:get_wielded_item():get_name()
+		if node ~= "" then
+			minetest.set_node(pos, { name = node })
+		end
 	end
 end)
 
