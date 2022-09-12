@@ -47,7 +47,7 @@ register('fire', {
 		name = "mccnt_cpe_fire.png",
 		animation = {
 			type = "sheet_2d",
-			frames_w = 32,
+			frames_w = 31,
 			frames_h = 1,
 			frame_length = 0.05,
 		}
